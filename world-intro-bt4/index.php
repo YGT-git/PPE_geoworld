@@ -3,55 +3,79 @@
 <main role="main" class="flex-shrink-0">
 
   <div class="container">
-    <h1>Les pays en Asie </h1>
+    <center>
+    <h3>Select a continent</h3>
+    <form action="" method="post">
+	    <select name="continent">
+        <option value="Select">...</option>
+		    <option value="North America">North America</option>
+		    <option value="Asia">Asia</option>
+		    <option value="Africa">Africa</option>
+		    <option value="Europe">Europe</option>
+        <option value="South America">South America</option>
+        <option value="Oceania">Oceania</option>
+        <option value="Antarctica">Antarctica</option>
+	    </select>
+      <input type="submit" name="submit" value="Afficher" />
+    </form>
+    <?php
+    if(isset($_POST['continent']))
+    {
+      $varContinent = $_POST['continent'];
+    }
+    ?>
+    </center>
+    <h1><br/><?php echo $varContinent; ?> </h1>
     <div>
         <?php
             require_once 'inc/manager-db.php';
-            $continent = 'Asia';
+            $continent = $varContinent;
             $desPays = getCountriesByContinent($continent);
-         ?>
-       <div>
-       <style>
-          table, th, td {
+        ?>
+        <div>
+        <style>
+            table, th, td {
             border: 1px solid black;
             border-collapse: collapse;
-          }
-        </style>
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Region</th>
-            <th>SurfaceArea</th>
-            <th>IndepYear</th>
-            <th>Population</th>
-            <th>LifeExpectancy</th>
-            <th>GNP</th>
-            <th>LocalName</th>
-            <th>GovernmentForm</th>
-            <th>HeadOfState</th>
-          </tr>
-          <tr>
-            <?php 
-              for($i = 0; $i < count($desPays); $i++){
-                echo "<tr>";
-                echo "<td>" . $desPays[$i]->Name ."</td>";
-                echo "<td>" . $desPays[$i]->Region ."</td>";
-                echo "<td>" . $desPays[$i]->SurfaceArea ."</td>";
-                echo "<td>" . $desPays[$i]->IndepYear ."</td>";
-                echo "<td>" . $desPays[$i]->Population ."</td>";
-                echo "<td>" . $desPays[$i]->LifeExpectancy ."</td>";
-                echo "<td>" . $desPays[$i]->GNP ."</td>";
-                echo "<td>" . $desPays[$i]->LocalName ."</td>";
-                echo "<td>" . $desPays[$i]->GovernmentForm ."</td>";
-                echo "<td>" . $desPays[$i]->HeadOfState ."</td>";
-                echo "</tr>";
-              }
-            ?>
-          </tr>
-        </table>
-
-         <?php var_dump($desPays[0]); ?>
-      </div>
+            }
+            th, td {
+             padding: 5px;
+             text-align: left;
+           }
+          </style>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Region</th>
+              <th>SurfaceArea</th>
+              <th>IndepYear</th>
+              <th>Population</th>
+              <th>LifeExpectancy</th>
+              <th>GNP</th>
+              <th>LocalName</th>
+              <th>GovernmentForm</th>
+              <th>HeadOfState</th>
+            </tr>
+            <tr>
+              <?php 
+                for($i = 0; $i < count($desPays); $i++){
+                  echo "<tr>";
+                  echo "<td>" . $desPays[$i]->Name ."</td>";
+                  echo "<td>" . $desPays[$i]->Region ."</td>";
+                  echo "<td>" . $desPays[$i]->SurfaceArea ."</td>";
+                  echo "<td>" . $desPays[$i]->IndepYear ."</td>";
+                  echo "<td>" . $desPays[$i]->Population ."</td>";
+                  echo "<td>" . $desPays[$i]->LifeExpectancy ."</td>";
+                  echo "<td>" . $desPays[$i]->GNP ."</td>";
+                  echo "<td>" . $desPays[$i]->LocalName ."</td>";
+                  echo "<td>" . $desPays[$i]->GovernmentForm ."</td>";
+                  echo "<td>" . $desPays[$i]->HeadOfState ."</td>";
+                  echo "</tr>";
+                }
+              ?>
+            </tr>
+          </table>
+        </div>
     </div>
     <p></p>
     <section class="jumbotron text-center">
